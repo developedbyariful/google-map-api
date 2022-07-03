@@ -29,6 +29,7 @@ app.get('/api/map', async (req, res) => {
     const [data] = await db.query(query);
     // console.log(data);
     res.status(200).json( data );
+    // res.status(200).render('index', {data : data})
 })
 
 

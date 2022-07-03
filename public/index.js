@@ -1,71 +1,14 @@
 // The following example creates five accessible and
 // focusable markers.
 function initMap() {
-
-
-  const getAllData = async () => {
-    const fetchData = await fetch('http://localhost:3000/api/map')
-    const fetchedJsonData = await fetchData.json();
-    // console.log(fetchedJsonData);
-    return fetchData;
-  }
-  const allData = getAllData()
-  console.log(allData);
-
-
-
-  const locations = [
-    {
-      name: "Dhaka",
-      lat: 23.810331,
-      lng: 90.412521,
-    },
-    {
-      name: "Sylhet",
-      lat: 24.89493,
-      lng: 91.868706,
-    },
-    {
-      name: "Rajshahi",
-      lat: 24.3745,
-      lng: 88.6042,
-    },
-    {
-      name: "Khulna",
-      lat: 22.8456,
-      lng: 89.5403,
-    },
-    {
-      name: "Rangpur",
-      lat: 25.743893,
-      lng: 89.27523,
-    },
-    {
-      name: "Barishal",
-      lat: 22.701002,
-      lng: 90.353455,
-    },
-  ];
+  const tourStops = [];
 
   // Set LatLng and title text for the markers. The first marker (Boynton Pass)
   // receives the initial focus when tab is pressed. Use arrow keys to
   // move between markers; press tab again to cycle through the map controls.
-  const tourStops = [];
-  for (let i = 0; i < locations.length; i++) {
-    const obj = {
-      lat: locations[i].lat,
-      lng: locations[i].lng,
-    };
-    const str = locations[i].name;
-
-    const tempData = [];
-    tempData.push(obj);
-    tempData.push(str);
-    tourStops.push(tempData);
-  }
   // console.log(tourStops);
 
-  const map = new google.maps.Map(document.getElementById("map"), {
+  const map = new google.maps.Map(document.getElementById('map'), {
     zoom: 5,
     center: { lat: 23.684994, lng: 90.356331 },
   });
@@ -73,22 +16,45 @@ function initMap() {
   // Create an info window to share between markers.
   const infoWindow = new google.maps.InfoWindow();
 
-  // Create the markers.
-  tourStops.forEach(([position, title], i) => {
-    const marker = new google.maps.Marker({
-      position,
-      map,
-      title: `${i + 1}. ${title}`, // !selcet name and title
-      label: `${i + 1}`, // !number
-      optimized: false,
-    });
-    // Add a click listener for each marker, and set up the info window.
-    marker.addListener("click", () => {
-      infoWindow.close();
-      infoWindow.setContent(marker.getTitle());
-      infoWindow.open(marker.getMap(), marker);
-    });
+  const getAllData = async () => {
+    const fetchData = await fetch('http://localhost:3000/api/map');
+    const locations = await fetchData.json();
+    return locations;
+  };
+  const allData = getAllData();
+  allData.then((locations) => {
+    for (let i = 0; i < locations.length; i++) {
+      const obj = {
+        lat: parseFloat(locations[i].latitude),
+        lng: parseFloat(locations[i].longitude),
+      };
+      const str = locations[i].name;
+      const tempData = [];
+      tempData.push(obj);
+      tempData.push(str);
+      tourStops.push(tempData);
+    }
+
+    // Create the markers.
+    try {
+      tourStops.forEach(([position, title], i) => {
+        const marker = new google.maps.Marker({
+          position,
+          map,
+          title: `${i + 1}. ${title}`, // !selcet name and title
+          label: `${i + 1}`, // !number
+          optimized: false,
+        });
+        // Add a click listener for each marker, and set up the info window.
+        marker.addListener('click', () => {
+          infoWindow.close();
+          infoWindow.setContent(marker.getTitle());
+          infoWindow.open(marker.getMap(), marker);
+        });
+      });
+    } catch (error) {
+      console.log(error)
+    }
   });
 }
-
 window.initMap = initMap;
