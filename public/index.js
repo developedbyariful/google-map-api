@@ -1,6 +1,19 @@
 // The following example creates five accessible and
 // focusable markers.
 function initMap() {
+
+
+  const getAllData = async () => {
+    const fetchData = await fetch('http://localhost:3000/api/map')
+    const fetchedJsonData = await fetchData.json();
+    // console.log(fetchedJsonData);
+    return fetchData;
+  }
+  const allData = getAllData()
+  console.log(allData);
+
+
+
   const locations = [
     {
       name: "Dhaka",
@@ -50,7 +63,7 @@ function initMap() {
     tempData.push(str);
     tourStops.push(tempData);
   }
-  console.log(tourStops);
+  // console.log(tourStops);
 
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 5,
