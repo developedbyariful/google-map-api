@@ -2,41 +2,40 @@
 <html>
   <head>
     <title>Add Map</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Google Map -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!-- Google map  -->
+    <script type="module" src="./index.js" defer></script>
+    <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="./style.css" />
-    <script type="module" src="./index.js"></script>
-    <!-- <script>
-      // Initialize and add the map
-      const data = async () => {
-        const getData = await fetch('http://localhost:3000/api/map/');
-        const locations = await getData.json();
-        console.log(locations);
-
-        async function initMap() {
-          // The location of Uluru
-          const uluru = { lat: -25.344, lng: 131.031 };
-          // The map, centered at Uluru
-          const map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
-            center: uluru,
-          });
-          // The marker, positioned at Uluru
-          const marker = new google.maps.Marker({
-            position: uluru,
-            map: map,
-          });
-        }
-        window.initMap = initMap;
-      };
-    </script> -->
   </head>
   <body>
     <h3>My Google Maps</h3>
+    <!--Filter Buttons -->
+    <div class="container">
+      <div class="filter-buttons">
+        <!-- <form action="api/v1/map/waltonplaza" method="GET"> -->
+          <button type="submit" id="plazaBtn">Walton Plaza</button>
+          <button type="submit" id="serviceBtn">Walton Service Centre</button>
+          <button type="submit" id="smartBtn">Smart Zone</button>
+          <button type="submit" id="allBtn">All</button>
+        <!-- </form> -->
+      </div>
+    </div>
     <!--The div element for the map -->
     <div id="map"></div>
 
+    <!-- Google map api & keys -->
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSrTFUr4w5jLye-MIsNMvp0x2m8PG5Zoo&callback=initMap&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSrTFUr4w5jLye-MIsNMvp0x2m8PG5Zoo&map_ids=ce15d6c29b8f9add&callback=initMap&v=weekly"
       defer
     ></script>
   </body>

@@ -1,7 +1,74 @@
 /* Set the size of the div element that contains the map */
 #map {
-    height: 400px;
-    /* The height is 400 pixels */
-    width: 100%;
-    /* The width is the width of the web page */
+  height: 80vh;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */
+}
+
+/* !Utility classes */
+.container {
+  max-width: 80%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ padding: 2vh 0vh;
+}
+.infoWindowIcon {
+  padding-right: 3px;
+}
+.infoWindowsText {
+  color: #fff;
+  padding: 0.5px 2px;
+  margin: 0;
+}
+
+.infoWindowsHeading {
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  background-color: rgba(30, 46, 78, 0.582);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  padding: 8px;
+  text-align: center;
+}
+.infoWindowsContactNumber {
+}
+.infoWindowAddress {
+}
+.infoWindowsDisplayInline {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.gm-style-iw.gm-style-iw-c {
+  padding: 1rem 1.4rem;
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  background-color: rgba(17, 25, 40, 0.84);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  color: #fff;
+}
+
+/* Filter buttons */
+.filter-buttons {
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gm-style-iw.gm-style-iw-c .gm-ui-hover-effect {
+  background-color: red!important;
+  /* padding: 0.1rem; */
+  color: red!important;
+  border-radius: 8px;
+}
+.gm-ui-hover-effect>span{
+  background-color: white;
+}
+.gm-style .gm-style-iw-t::after {
+  background: rgba(17, 25, 40, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }
